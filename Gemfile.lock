@@ -68,6 +68,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -92,6 +95,10 @@ GEM
     debug (1.7.1)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
     ffi (1.15.5)
@@ -101,6 +108,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    igdb_client (4.0.0)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -182,7 +190,6 @@ GEM
     reline (0.3.2)
       io-console (~> 0.5)
     rexml (3.2.5)
-    ruby-apicalypse (0.1.0)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -237,10 +244,13 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  annotate
   bootsnap
   capybara
   debug
+  dotenv-rails (~> 2.1, >= 2.1.1)
   font-awesome-sass (~> 6.2.1)
+  igdb_client
   importmap-rails
   jbuilder
   pg (~> 1.1)
@@ -248,7 +258,6 @@ DEPENDENCIES
   rails (~> 7.0.4)
   react-rails (~> 2.6, >= 2.6.1)
   redis (~> 4.0)
-  ruby-apicalypse
   sassc-rails
   selenium-webdriver
   sprockets-rails
