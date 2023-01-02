@@ -9,6 +9,8 @@ gem 'sassc-rails'
 
 gem "font-awesome-sass", "~> 6.2.1"
 
+gem 'ruby-apicalypse'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
