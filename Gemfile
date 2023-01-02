@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
-gem 'react-rails', '~> 2.6', '>= 2.6.1'
-
 gem 'sassc-rails'
 
 gem "font-awesome-sass", "~> 6.2.1"
@@ -85,3 +83,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "shakapacker", "= 6.5"
+
+gem "react-rails", "= 2.6"
