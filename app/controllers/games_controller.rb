@@ -2,13 +2,8 @@ class GamesController < ApplicationController
 
   before_action :get_game, only: [:show, :edit, :update, :destroy]
 
-  IGDB = IGDB::Client.new(
-    ENV['IGDB_CLIENT_ID'],
-    ENV['IGDB_CLIENT_SECRET']
-  )
 
   def index(search = params[:search] || "")
-    @games = IGDB.search(search, {fields: "name,summary", limit: 10})
   end
 
   def show

@@ -1,12 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 
 function HelloWorld(props) {
-  return <React.Fragment>{props.greeting}</React.Fragment>;
-}
+  const [greeting, setGreeting] = useState(props.greeting);
 
-HelloWorld.propTypes = {
-  greeting: PropTypes.string,
-};
+  console.log(greeting);
+
+  return <div className="text-xl">{greeting}</div>;
+}
 
 export default HelloWorld;
