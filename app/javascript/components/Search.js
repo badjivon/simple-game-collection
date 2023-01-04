@@ -33,12 +33,12 @@ function Search(props) {
         <input
           value={searchInput}
           onChange={handleChange}
-          className="border border-gray-400 rounded-lg p-2 w-1/2 mb-6"
+          className="border border-gray-400 rounded-lg p-2 w-1/2 mb-12"
           type="text"
           placeholder="Search"
         />
       </form>
-      <div className="grid grid-cols-5 gap-4 grid-flow-row">
+      <div className="grid grid-cols-4 gap-4 grid-flow-row">
         {gameData.map((game) => {
           return (
             <div key={game.id}>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 function GameCard(props) {
-  const [gameId, gameName, gameImage, gameRelease, gameSlug] = [
+  const gameRelease =
+    props.gameRelease === null ? "N/A" : props.gameRelease.slice(0, 4);
+
+  const [gameId, gameName, gameImage, gameSlug] = [
     props.gameId,
     props.gameName,
     props.gameImage,
-    props.gameRelease.slice(0, 4),
     props.gameSlug,
   ];
 
@@ -16,7 +18,7 @@ function GameCard(props) {
   }, []);
 
   const handleAddClick = () => {
-    prepareGamePackage();
+    postToRails();
   };
 
   const handleDeleteClick = () => {
@@ -33,7 +35,7 @@ function GameCard(props) {
       .catch((err) => console.log(err));
   };
 
-  const prepareGamePackage = () => {
+  const postToRails = () => {
     const game = {
       name: gameName,
       cover_url: gameImage,
@@ -41,11 +43,6 @@ function GameCard(props) {
       year: gameRelease,
       slug: gameSlug,
     };
-    postToRails(game);
-  };
-
-  const postToRails = (game) => {
-    console.log(JSON.stringify(game));
     fetch("/games", {
       method: "POST",
       headers: {
@@ -80,9 +77,9 @@ function GameCard(props) {
     return (
       <button
         onClick={handleAddClick}
-        className="inline-block bg-green-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
+        className="bg-green-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
       >
-        +
+        <i className="fas fa-plus"></i>
       </button>
     );
   };
@@ -91,25 +88,33 @@ function GameCard(props) {
     return (
       <span
         onClick={handleDeleteClick}
-        className="inline-block bg-red-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
+        className="bg-red-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
       >
-        -
+        <i className="fas fa-minus"></i>
       </span>
     );
   };
 
   return (
-    <div className="max-w-sm max-h-sm rounded overflow-hidden shadow-lg m-2 bg-white">
-      <img className="w-full" src={gameImage} alt={gameName} />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{gameName}</div>
-        {/* <p className="text-gray-700 text-base">{gameName} is a game.</p> */}
-      </div>
-      <div className="px-6 pt-4 pb-2 flex justify-between">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          {gameRelease}
-        </span>
-        {isAdded ? <RemoveGame /> : <AddGame />}
+    <div className="h-96 overflow-hidden rounded shadow-lg m-2 bg-white">
+      <div
+        className="bg-cover h-48"
+        style={{ backgroundImage: `url(${gameImage})` }}
+        alt={gameName}
+      />
+      <div className="flex flex-col justify-between h-48">
+        <div className="px-6 py-4">
+          <div className="font-bold h-24 text-lg mb-2 text-ellipsis">
+            {gameName}
+          </div>
+          {/* <p className="text-gray-700 text-base">{gameName} is a game.</p> */}
+        </div>
+        <div className="px-6 pt-4 pb-2 flex justify-between">
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            {gameRelease}
+          </span>
+          {isAdded ? <RemoveGame /> : <AddGame />}
+        </div>
       </div>
     </div>
   );
