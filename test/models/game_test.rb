@@ -3,13 +3,14 @@
 # Table name: games
 #
 #  id         :bigint           not null, primary key
-#  name       :string
 #  cover_url  :string
-#  summary    :string
+#  name       :string
 #  status     :string
+#  summary    :string
 #  wishlisted :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  rawg_id    :integer
 #
 require "test_helper"
 

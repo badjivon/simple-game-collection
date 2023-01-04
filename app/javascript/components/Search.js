@@ -4,6 +4,7 @@ import GameSearch from "./GameSearch";
 function Search(props) {
   const [searchInput, setSearchInput] = useState("");
   const [gameData, setGameData] = useState([]);
+  const number_of_elements = 20;
 
   const handleChange = (event) => {
     setSearchInput(event.target.value);
@@ -11,7 +12,7 @@ function Search(props) {
 
   const getRawgGames = (searchInput) => {
     fetch(
-      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchInput}&page=1&page_size=20&search_precise=true&ordering=-metacritic`
+      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchInput}&page=1&page_size=${number_of_elements}&ordering=-metacritic`
     )
       .then((res) => res.json())
       .then((data) => setGameData(data.results))
@@ -32,8 +33,6 @@ function Search(props) {
         <input
           value={searchInput}
           onChange={handleChange}
-          // how to get my search bar centered?
-
           className="border border-gray-400 rounded-lg p-2 w-1/2 mb-6"
           type="text"
           placeholder="Search"

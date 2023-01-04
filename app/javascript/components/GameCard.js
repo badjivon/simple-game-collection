@@ -1,12 +1,41 @@
 import React from "react";
 
 function GameCard(props) {
-  const gameName = props.gameName;
-  const gameImage = props.gameImage;
-  const gameRelease = props.gameRelease;
+  const [gameId, gameName, gameImage, gameRelease] = [
+    props.gameId,
+    props.gameName,
+    props.gameImage,
+    props.gameRelease.slice(0, 4),
+  ];
 
-  const handleClick = (event) => {
-    console.log("clicked");
+  const handleClick = () => {
+    prepareGamePackage();
+  };
+
+  const prepareGamePackage = () => {
+    const game = {
+      name: gameName,
+      cover_url: gameImage,
+      rawg_id: gameId,
+    };
+    postToRails(game);
+  };
+
+  const postToRails = (game) => {
+    console.log(JSON.stringify(game));
+    fetch("/games", {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+          .content,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(game),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   return (

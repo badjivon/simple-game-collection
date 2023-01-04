@@ -3,20 +3,25 @@ class GamesController < ApplicationController
   before_action :get_game, only: [:show, :edit, :update, :destroy]
 
 
-  def index(search = params[:search] || "")
+  def index
+    @games = Game.all
   end
 
   def show
+    render json: @game
+  end
+
+  def search
+
   end
 
   def new
-    @game = Game.new
   end
 
   def create
     @game = Game.new(game_params)
     if @game.save
-      redirect_to @game
+      render json: @game
     else
       render :new
     end
@@ -41,7 +46,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name, :cover_url, :summary, :status, :wishlisted)
+    params.require(:game).permit(:name, :cover_url, :rawg_id)
   end 
 
   def get_game
