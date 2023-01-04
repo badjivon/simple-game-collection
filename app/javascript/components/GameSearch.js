@@ -8,6 +8,8 @@ function GameSearch(props) {
       gameName={games.name}
       gameImage={games.background_image}
       gameRelease={games.released}
+      gameSlug={games.slug}
+      gameId={games.id}
     />
   );
 }

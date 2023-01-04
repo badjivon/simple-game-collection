@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function GameCard(props) {
-  const [gameId, gameName, gameImage, gameRelease] = [
+  const [gameId, gameName, gameImage, gameRelease, gameSlug] = [
     props.gameId,
     props.gameName,
     props.gameImage,
     props.gameRelease.slice(0, 4),
+    props.gameSlug,
   ];
 
-  const handleClick = () => {
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    getGame();
+  }, []);
+
+  const handleAddClick = () => {
     prepareGamePackage();
+  };
+
+  const handleDeleteClick = () => {
+    deleteFromRails();
+  };
+
+  const getGame = () => {
+    console.log("Getting game");
+    fetch(`/json_index?rawg_id=${gameId}`)
+      .then((res) => res.json())
+      .then((data) =>
+        data.length > 0 ? setIsAdded(data[0]) : setIsAdded(false)
+      )
+      .catch((err) => console.log(err));
   };
 
   const prepareGamePackage = () => {
@@ -17,6 +38,8 @@ function GameCard(props) {
       name: gameName,
       cover_url: gameImage,
       rawg_id: gameId,
+      year: gameRelease,
+      slug: gameSlug,
     };
     postToRails(game);
   };
@@ -34,8 +57,45 @@ function GameCard(props) {
       body: JSON.stringify(game),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => getGame())
       .catch((err) => console.log(err));
+  };
+
+  const deleteFromRails = () => {
+    fetch(`/games/${isAdded.id}`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+          .content,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((data) => console.log("deleted"))
+      .then((data) => getGame())
+      .catch((err) => console.log(err));
+  };
+
+  const AddGame = () => {
+    return (
+      <button
+        onClick={handleAddClick}
+        className="inline-block bg-green-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
+      >
+        +
+      </button>
+    );
+  };
+
+  const RemoveGame = () => {
+    return (
+      <span
+        onClick={handleDeleteClick}
+        className="inline-block bg-red-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
+      >
+        -
+      </span>
+    );
   };
 
   return (
@@ -49,12 +109,7 @@ function GameCard(props) {
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           {gameRelease}
         </span>
-        <span
-          onClick={handleClick}
-          className="inline-block bg-green-400 px-3 py-1 rounded-full text-sm font-semibold text-white mb-2"
-        >
-          +
-        </span>
+        {isAdded ? <RemoveGame /> : <AddGame />}
       </div>
     </div>
   );

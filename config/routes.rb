@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :games
+  get '/json_index', to: 'games#json_index'
 end
