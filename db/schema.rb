@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_171841) do
     t.datetime "updated_at", null: false
     t.integer "rawg_id"
     t.string "slug"
-    t.integer "year"
+    t.string "year"
   end
 
 end

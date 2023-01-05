@@ -9,7 +9,7 @@
 #  status     :string
 #  summary    :string
 #  wishlisted :boolean
-#  year       :integer
+#  year       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  rawg_id    :integer

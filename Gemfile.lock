@@ -264,7 +264,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4)
-  react-rails (= 2.6)
+  react-rails
   redis (~> 4.0)
   sassc-rails
   selenium-webdriver

@@ -1,9 +1,16 @@
 class GamesController < ApplicationController
 
-  before_action :get_game, only: [:show, :edit, :update, :destroy]
+  before_action :get_game, only: [:show, :update, :destroy]
 
   def index
     @games = Game.all
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @games }
+    end
+  end
+
+  def library
   end
 
   def json_index(rawg_id = params[:rawg_id])
@@ -36,7 +43,7 @@ class GamesController < ApplicationController
 
   def update
     if @game.update(game_params)
-      redirect_to @game
+      render json: @game
     else
       render :edit
     end
@@ -49,7 +56,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name, :cover_url, :rawg_id, :slug, :year)
+    params.require(:game).permit(:name, :cover_url, :rawg_id, :slug, :year, :status)
   end 
 
   def get_game

@@ -26,19 +26,22 @@ function Search(props) {
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-center justify-center w-full"
-      >
-        <input
-          value={searchInput}
-          onChange={handleChange}
-          className="border border-gray-400 rounded-lg p-2 w-1/2 mb-12"
-          type="text"
-          placeholder="Search"
-        />
-      </form>
-      <div className="grid grid-cols-4 gap-4 grid-flow-row">
+      <div className="flex">
+        <form
+          onSubmit={handleSubmit}
+          className="flex items-center justify-center w-full"
+        >
+          <input
+            value={searchInput}
+            onChange={handleChange}
+            className="border border-gray-400 rounded-lg p-2 w-1/2"
+            type="text"
+            placeholder="Search"
+          />
+        </form>
+      </div>
+
+      <div className="mt-12 grid grid-cols-4 gap-4 grid-flow-row">
         {gameData.map((game) => {
           return (
             <div key={game.id}>

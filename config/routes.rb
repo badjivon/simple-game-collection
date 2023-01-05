@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :games
   get '/json_index', to: 'games#json_index'
+  get '/library', to: 'games#library'
 end
