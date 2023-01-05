@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An app made in three days in order to fully understand how React works with Rails.
+It is a minimum viable product but it works properly.
 
-Things you may want to cover:
+simple-game-collection is a Video Game backlog manager.
+It uses the RAWG API to search games that you can seamlessly copy to your database and then put a status on them (Playing, Completed, Paused, In Backlog)
 
-* Ruby version
+Ruby : 3.1.2
+Rails : 7.0.4
 
-* System dependencies
+Clone then Bundle install
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Don't pay attention to the code, this is my first time with React
