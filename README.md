@@ -1,5 +1,7 @@
 # README
 
+Sample video here : https://share.cleanshot.com/qMps2n8k
+
 An app made in three days in order to fully understand how React works with Rails.
 It is a minimum viable product but it works properly.
 
